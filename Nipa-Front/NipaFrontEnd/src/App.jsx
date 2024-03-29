@@ -81,6 +81,20 @@ function App() {
     }
   };
 
+  const handleResetFilter = async () => {
+    try {
+      // Send request to reset filter on the backend
+      const response = await axios.get('http://localhost:5000/api/tickets');
+      setFilteredTickets([]); // Reset filtered tickets state
+      setSortBy(''); // Reset sort by state
+      setFilterBy(''); // Reset filter by state
+      setLoading(false);
+      console.log('Filter reset successfully');
+    } catch (error) {
+      console.error('Error resetting filter:', error);
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTicket(prevTicket => ({
@@ -150,6 +164,7 @@ function App() {
       <button className="filter-button" onClick={handleFilterClick}>
         Filter <i className="fas fa-filter"></i>
       </button>
+      <button onClick={handleResetFilter}>Reset Filter</button>
       <StatusTable
         tickets={filteredTickets.length > 0 ? filteredTickets : tickets}
         onEdit={handleEdit}
