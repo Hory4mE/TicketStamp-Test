@@ -155,7 +155,7 @@ function App() {
             </div>
           </div>
           <div className="ticket-footer">
-            <button className="btn" onClick={createTicket}>Submit</button>
+            <button className="btn" onClick={createTicket}>Confirm</button>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ function App() {
       <button className="filter-button" onClick={handleFilterClick}>
         Filter <i className="fas fa-filter"></i>
       </button>
-      <button onClick={handleResetFilter}>Reset Filter</button>
+      <button className="ResetFilter-button" onClick={handleResetFilter}>Reset Filter</button>
       <StatusTable
         tickets={filteredTickets.length > 0 ? filteredTickets : tickets}
         onEdit={handleEdit}

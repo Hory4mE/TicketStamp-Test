@@ -28,13 +28,13 @@ function StatusTable({ tickets }) {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending':
-        return 'orange';
+        return 'rgba(255, 153, 0, 0.8)';
       case 'accepted':
-        return 'green';
+        return 'rgba(102, 255, 153,0.8)';
       case 'resolved':
-        return 'magenta';
+        return 'rgba(204, 153, 255,0.9)';
       case 'rejected':
-        return 'red';
+        return 'rgba(204, 77, 77,0.9)';
       default:
         return 'black';
     }
@@ -58,8 +58,7 @@ function StatusTable({ tickets }) {
             <th>Status</th>
             <th>Created Time</th>
             <th>Latest Time</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th colSpan="2">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +67,7 @@ function StatusTable({ tickets }) {
               <td>{ticket.title}</td>
               <td>{ticket.description}</td>
               <td>{ticket.contactInfo}</td>
-              <td>{ticket.status}</td>
+              <td style={{ fontWeight: 'bold', textDecoration: 'underline' }}>{ticket.status}</td>
               <td>{formatTimeStamp(ticket.createdTimeStamp)}</td>
               <td>{formatTimeStamp(ticket.latestTimeStamp)}</td>
               <td><button onClick={() => handleEdit(ticket.id)}>Edit</button></td> {/* Pass ticket ID to handleEdit */}
