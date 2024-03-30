@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import StatusTable from './components/StatusTable';
-import Modal from './components/Modal/Modal.jsx';
+import CreateTicket from './components/CreateTicket';
+import TicketTable from './components/TicketTable';
+import FilterModal from './components/FilterModal';
+import { fetchTickets, createNewTicket } from './ApiRequest/api';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -14,42 +15,37 @@ function App() {
   const [ticket, setTicket] = useState([]);
 
 
-  //DEFINE FETCHING FROM OUTSIDE (use for create Ticket)
-  const fetchTickets = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/tickets');
-      setTickets(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching tickets:', error);
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    const fetchTickets = async () => { // Fetch All Clean Data
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/tickets');
-        setTickets(response.data);
+        const data = await fetchTickets();
+        setTickets(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching tickets:', error);
         setLoading(false);
       }
     };
-
-    fetchTickets();
+    fetchData();
   }, []);
 
   const handleEdit = (id, field, value) => {
     const updatedTickets = tickets.map(ticket => {
       if (ticket.id === id) {
         ticket[field] = value;
-        ticket.latestTimeStamp = new Date().toLocaleString(); // Stamp new time
+        ticket.latestTimeStamp = new Date().toLocaleString();
       }
       return ticket;
     });
     setTickets(updatedTickets);
+  };
+
+  const handleSortByChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  const handleFilterByChange = (e) => {
+    setFilterBy(e.target.value);
   };
 
   const handleFilterClick = () => {
@@ -165,32 +161,19 @@ function App() {
         Filter <i className="fas fa-filter"></i>
       </button>
       <button className="ResetFilter-button" onClick={handleResetFilter}>Reset Filter</button>
-      <StatusTable
-        tickets={filteredTickets.length > 0 ? filteredTickets : tickets}
-        onEdit={handleEdit}
+      <TicketTable
+        tickets={tickets}
+        filteredTickets={filteredTickets}
+        handleEdit={handleEdit}
       />
-      <Modal open={filterModalOpen} onClose={handleFilterModalClose}>
-        <h3>Filter and Sort</h3>
-        <div>
-          <label>Sort by:</label>
-          <select onChange={e => setSortBy(e.target.value)}>
-            <option value="">None</option>
-            <option value="status">Status</option>
-            <option value="latest">Latest Update</option>
-          </select>
-        </div>
-        <div>
-          <label>Filter by status:</label>
-          <select onChange={e => setFilterBy(e.target.value)}>
-            <option value="">None</option>
-            <option value="pending">Pending</option>
-            <option value="accepted">Accepted</option>
-            <option value="resolved">Resolved</option>
-            <option value="rejected">Rejected</option>
-          </select>
-        </div>
-        <button onClick={handleFilter}>Apply Filter</button>
-      </Modal>
+      <FilterModal
+        open={filterModalOpen}
+        onClose={handleFilterModalClose}
+        handleFilter={handleFilter}
+        handleResetFilter={handleResetFilter}
+        handleSortByChange={handleSortByChange}
+        handleFilterByChange={handleFilterByChange}
+      />
     </div>
   );
 }
