@@ -1,0 +1,90 @@
+.ticket-container {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+  }
+  
+  .ticket-btn {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .ticket-form {
+    background-color: #222;
+    padding: 0px 40px;
+    border-radius: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    justify-content: center;
+  }
+  
+  .ticket-form.visible {
+    justify-content: center;
+    max-height: 600px; /* Adjust as needed */
+  }
+  
+  .ticket-header {
+    margin-top: 10%;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  
+  .ticket-header h2 {
+    color: #fff;
+  }
+  
+  .ticket-body .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .ticket-body label {
+    color: #fff;
+  }
+  
+  .ticket-body input[type="text"],
+  .ticket-body textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  .ticket-body textarea {
+    resize: none;
+  }
+  
+  .ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    color: #fff; /* Set text color to white */
+    margin-bottom: 10%;
+  }
+  
+  .ticket-footer button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .ticket-footer button:hover {
+    background-color: #555; /* Darken color on hover */
+  }
+  
+  .error {
+    color: red; 
+    font-size: 14px; 
+    margin-top: 5px; 
+  }
+  

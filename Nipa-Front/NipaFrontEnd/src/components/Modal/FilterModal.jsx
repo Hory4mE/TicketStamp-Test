@@ -1,6 +1,8 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import './FilterModal.css'
 
-const FilterModal = ({ open, onClose, handleFilter, handleResetFilter, handleSortByChange, handleFilterByChange }) => {
+
+const FilterModal = ({ open, onClose, handleFilter, handleSortByChange, handleFilterByChange }) => {
   return (
     <div className={`modal ${open ? 'open' : ''}`}>
       <div className="modal-content">
@@ -16,7 +18,7 @@ const FilterModal = ({ open, onClose, handleFilter, handleResetFilter, handleSor
         </div>
         <div>
           <label>Filter by status:</label>
-          <select onChange={handleFilterByChange}>
+          <select onChange={handleFilterByChange} required>
             <option value="">None</option>
             <option value="pending">Pending</option>
             <option value="accepted">Accepted</option>
@@ -25,7 +27,7 @@ const FilterModal = ({ open, onClose, handleFilter, handleResetFilter, handleSor
           </select>
         </div>
         <button onClick={handleFilter}>Apply Filter</button>
-        <button onClick={handleResetFilter}>Reset Filter</button>
+        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import './Modal.css';
 
 function Modal({ open, onClose, children }) {
