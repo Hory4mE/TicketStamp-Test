@@ -74,7 +74,7 @@ router.put('/tickets/:id', async (req, res) => { // UPDATE STATUS
         ticket.status = status;
 
         // Update the ticket in the database
-        await db.query('UPDATE Tickets SET status = ? WHERE id = ?', [status, id]);
+        await db.query('UPDATE Tickets SET status = ?, latestTimeStamp = NOW() WHERE id = ?', [status, id]);
 
 
         if(res.status === '201')console.log('Successfully Update tickets');

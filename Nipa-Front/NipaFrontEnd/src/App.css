@@ -1,79 +1,12 @@
 .BigContainer {
   display: flex;
-  justify-content: space-between; /* Aligns the left and right side content */
-  align-items: flex-start; /* Aligns items at the start vertically */
-}
-
-.ticket-container {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-
-.ticket {
-  background-color: #f65;
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 20px;
-  width: 400px;
-}
-
-.ticket-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.ticket-icon {
-  width: 40px;
-  margin-right: 10px;
-}
-
-.ticket h2 {
-  margin: 0;
-}
-
-.ticket-body {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.form-group input[type="text"],
-.form-group textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.btn {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #0056b3;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .filter-button,
 .ResetFilter-button {
-  background-color: #007bff;
+  background-color: #333;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -83,10 +16,10 @@
 
 .filter-button:hover,
 .ResetFilter-button:hover {
-  background-color: #0056b3;
+  background-color: #555;
 }
 
 .ResetFilter-button {
-  background-color: #f44336;
+  background-color: #333;
   margin-left: 20px;
 }

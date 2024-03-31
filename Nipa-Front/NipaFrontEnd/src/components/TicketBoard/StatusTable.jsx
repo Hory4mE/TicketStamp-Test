@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import './StatusTable.css';
-import NotiModal from './Modal/NotiModal';
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import "./StatusTable.css";
+import NotiModal from "../Modal/NotiModal";
 
-function StatusTable({ tickets }) {
+function StatusTable({
+  tickets,
+  filteredTickets,
+  setFilteredTickets,
+  fetchTicketsData,
+}) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedTicketId, setSelectedTicketId] = useState(null); // State to hold the selected ticket ID
-  const [action, setAction] = useState('');
+  const [action, setAction] = useState("");
 
-  const handleEdit = (ticketId) => { // Modified to accept ticketId
-    setSelectedTicketId(ticketId); // Set the selected ticket ID
-    setAction('edit');
+  const handleEdit = (ticketId) => {
+    setSelectedTicketId(ticketId);
+    setAction("edit");
     setShowEditModal(true);
   };
 
-  const handleDelete = (ticketId) => { // Modified to accept ticketId
-    setSelectedTicketId(ticketId); // Set the selected ticket ID
-    setAction('delete');
+  const handleDelete = (ticketId) => {
+    setSelectedTicketId(ticketId);
+    setAction("delete");
     setShowDeleteModal(true);
   };
 
@@ -27,16 +33,16 @@ function StatusTable({ tickets }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending':
-        return 'rgba(255, 153, 0, 0.8)';
-      case 'accepted':
-        return 'rgba(102, 255, 153,0.8)';
-      case 'resolved':
-        return 'rgba(204, 153, 255,0.9)';
-      case 'rejected':
-        return 'rgba(204, 77, 77,0.9)';
+      case "pending":
+        return "rgba(255, 153, 0, 0.8)";
+      case "accepted":
+        return "rgba(102, 255, 153,0.8)";
+      case "resolved":
+        return "rgba(204, 153, 255,0.9)";
+      case "rejected":
+        return "rgba(204, 77, 77,0.9)";
       default:
-        return 'black';
+        return "black";
     }
   };
 
@@ -52,6 +58,7 @@ function StatusTable({ tickets }) {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Title</th>
             <th>Description</th>
             <th>Contact Info</th>
@@ -63,25 +70,43 @@ function StatusTable({ tickets }) {
         </thead>
         <tbody>
           {tickets.map((ticket, index) => (
-            <tr key={`${ticket.id}_${index}`} style={{ backgroundColor: getStatusColor(ticket.status) }}>
+            <tr key={`${ticket.id}_${index}`}>
+              <td>{ticket.id}</td>
               <td>{ticket.title}</td>
               <td>{ticket.description}</td>
               <td>{ticket.contactInfo}</td>
-              <td style={{ fontWeight: 'bold', textDecoration: 'underline' }}>{ticket.status}</td>
+              <td style={{ fontWeight: "bold"}}>
+                <div
+                  className="badge badge-warning"
+                  style={{ backgroundColor: getStatusColor(ticket.status) }}
+                >
+                  {ticket.status}
+                </div>
+              </td>
               <td>{formatTimeStamp(ticket.createdTimeStamp)}</td>
               <td>{formatTimeStamp(ticket.latestTimeStamp)}</td>
-              <td><button onClick={() => handleEdit(ticket.id)}>Edit</button></td> {/* Pass ticket ID to handleEdit */}
-              <td><button onClick={() => handleDelete(ticket.id)}>Delete</button></td> {/* Pass ticket ID to handleDelete */}
+              <td>
+                <button onClick={() => handleEdit(ticket.id)}>Edit</button>
+              </td>{" "}
+              {/* Pass ticket ID to handleEdit */}
+              <td>
+                <button onClick={() => handleDelete(ticket.id)}>Delete</button>
+              </td>{" "}
+              {/* Pass ticket ID to handleDelete */}
             </tr>
           ))}
         </tbody>
       </table>
-      {/* Render Edit and Delete Modals */}
+      {/*Edit and Delete Modal*/}
       {showEditModal && (
         <NotiModal
           action={action}
           onClose={closeModal}
           selectedTicketId={selectedTicketId}
+          fetchTicketsData={fetchTicketsData}
+          tickets={tickets}
+          filteredTickets={filteredTickets}
+          setFilteredTickets={setFilteredTickets}
         />
       )}
       {showDeleteModal && (

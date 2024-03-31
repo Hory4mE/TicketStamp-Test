@@ -1,0 +1,91 @@
+.status-table {
+  margin: 20px auto;
+  width: 80%;
+  font-family: Arial, sans-serif;
+  background-color: #222; /* Dark background color */
+  color: #fff; /* White text color */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+thead th {
+  background-color: #333; /* Darker background color for header */
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #444; /* Darker background color for even rows */
+}
+
+tbody tr:hover {
+  background-color: #555; /* Darker background color on hover */
+}
+
+.ticket:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Lighter background color on hover */
+}
+
+.ticket td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket td:first-child {
+  font-weight: bold;
+}
+
+.ticket td:last-child {
+  font-style: italic;
+}
+
+/* Dynamic status colors */
+.badge pending {
+  background-color: rgba(255, 153, 0, 0.8);
+}
+.badge accepted {
+  background-color: rgba(102, 255, 153, 0.8);
+}
+.badge resolved {
+  background-color: rgba(204, 153, 255, 0.9);
+}
+.badge rejected {
+  background-color: rgba(204, 77, 77, 0.9);
+}
+
+
+td {
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: .55rem;
+}
+
+/* Style for the badge */
+.badge {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  min-width: 19px;
+  border-radius: 50px;
+}
+
+.badge-warning {
+  color: #212529;
+  background-color: #f7b924;
+}
